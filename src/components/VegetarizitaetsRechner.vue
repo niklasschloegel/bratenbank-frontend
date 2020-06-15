@@ -28,7 +28,7 @@ export default defineComponent({
   setup() {
     const veggikg = ref(0);
     const nonveggikg = ref(0);
-    const prozent = computed(() => Math.round(((veggikg.value) / (veggikg.value+nonveggikg.value)) * 100));
+    const prozent = veggikg.value !== 0 && nonveggikg.value !== 0 ? computed(() => Math.round(((veggikg.value) / (veggikg.value+nonveggikg.value)) * 100)) : 0;
 
 return {
       veggikg,
