@@ -1,9 +1,9 @@
 <template>
   <tr class="bratenzeile">
-    <td></td>
-    <td></td>
+    <td>{{beschreibung}}</td>
+    <td>{{haltbarbis}}</td>
     <td><StarRating :maxsterne="5" :sterne="vgrad / 25" /></td>
-    <td></td>
+    <td>{{anbieter.vollname}}, {{abholort}}</td>
   </tr>
 </template>
 

@@ -39,23 +39,17 @@ export default defineComponent({
     const { liste, update, errormessage } = useBraten();
     
     // Variable "suchwort" vereinbaren
-
-
-
+    const suchwort = ref("");
     
     // sobald Komponente initialisiert ist, update() zum Füllen der "liste" ausführen
     onMounted(async () => {
       await update();
     });
 
-
     // Funktion reloadList() soll auf Button-Druck Liste neu laden
-
-
-
-
-
-
+    function reloadList(){
+      return update();
+    }
 
     // Variable "anzeigeliste" soll nur diejenigen Einträge aus "liste" enthalten,
     // die "suchwort" enthalten (Groß-/Kleinschreibung egal) in
@@ -64,21 +58,19 @@ export default defineComponent({
     // die ganze Liste enthalten. 
     // Bei Änderungen von "suchwort" muss "anzeigeliste" sich sofort anpassen
     
-    const anzeigeliste = liste  // bitte geeignet ersetzen
-
-
-
-
-
-
+    const anzeigeliste = computed(() => {
+        if (suchwort.value.length < 3) return liste.value;
+        return liste.value.filter(b => 
+          b.beschreibung.toLowerCase().includes(suchwort.value.toLowerCase()) ||
+          b.anbieter.vollname.toLowerCase().includes(suchwort.value.toLowerCase()) ||
+          b.abholort.toLowerCase().includes(suchwort.value.toLowerCase()));
+    });
 
     return {
       anzeigeliste,
-      /*
+      suchwort,
       reloadList,
-      errormessage,
-      suchwort
-      */
+      errormessage
     };
   }
 });
