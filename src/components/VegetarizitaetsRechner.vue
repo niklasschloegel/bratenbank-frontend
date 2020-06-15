@@ -26,22 +26,14 @@ export default defineComponent({
   // Name der Komponente
   name: "VegetarizitaetsRechner",
   setup() {
-    // Bitte stellen Sie hier die benötigten Objekte (siehe return) bereit,
-    // damit "veggikg" und "nonveggikg" eingegeben werden können und
-    // "prozent" daraus bei jeder Änderung automatisch berechnet wird
-    
+    const veggikg = ref(0);
+    const nonveggikg = ref(0);
+    const prozent = computed(() => Math.round(((veggikg.value) / (veggikg.value+nonveggikg.value)) * 100));
 
-
-
-
-
-    // Ergebnis der Setup-Funktion in Template sichtbar
-    return {
-      /*
+return {
       veggikg,
       nonveggikg,
       prozent
-      */
     };
   }
 });
