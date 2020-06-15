@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="block">
-      <h1 class="title">Vegetarizitätsrechner</h1>
+      <h2 class="title">Vegetarizitätsrechner</h2>
       <div class="block">Wie setzt sich Ihr Braten zusammen?</div>
       <div class="field">
         <label class="label">kg vegetarisch</label>

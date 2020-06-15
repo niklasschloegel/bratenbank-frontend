@@ -1,9 +1,15 @@
 <template>
   <div class="bratenliste">
-    <button @click="reloadList()">
-      <i class="fas fa-sync" />
-    </button>
-    <input v-model="suchwort" placeholder="Suchbegriff" />
+    <div class="field has-addons">
+      <div class="control">
+        <a class="button is-primary is-small" @click="reloadList()">
+          <i class="fas fa-sync" />
+        </a>
+      </div>
+      <div class="control">
+        <input class="input is-small" v-model="suchwort" placeholder="Suchbegriff" />
+      </div>
+    </div>
     <table class="table">
       <thead>
         <th>Beschreibung</th>
@@ -37,17 +43,17 @@ export default defineComponent({
   },
   setup() {
     const { liste, update, errormessage } = useBraten();
-    
+
     // Variable "suchwort" vereinbaren
     const suchwort = ref("");
-    
+
     // sobald Komponente initialisiert ist, update() zum Füllen der "liste" ausführen
     onMounted(async () => {
       await update();
     });
 
     // Funktion reloadList() soll auf Button-Druck Liste neu laden
-    function reloadList(){
+    function reloadList() {
       return update();
     }
 
@@ -55,15 +61,19 @@ export default defineComponent({
     // die "suchwort" enthalten (Groß-/Kleinschreibung egal) in
     // einem der Felder "beschreibung", "vollname" oder "abholort"
     // Wenn "suchwort" weniger als 3 Zeichen lang ist, soll "anzeigeliste"
-    // die ganze Liste enthalten. 
+    // die ganze Liste enthalten.
     // Bei Änderungen von "suchwort" muss "anzeigeliste" sich sofort anpassen
-    
+
     const anzeigeliste = computed(() => {
-        if (suchwort.value.length < 3) return liste.value;
-        return liste.value.filter(b => 
+      if (suchwort.value.length < 3) return liste.value;
+      return liste.value.filter(
+        b =>
           b.beschreibung.toLowerCase().includes(suchwort.value.toLowerCase()) ||
-          b.anbieter.vollname.toLowerCase().includes(suchwort.value.toLowerCase()) ||
-          b.abholort.toLowerCase().includes(suchwort.value.toLowerCase()));
+          b.anbieter.vollname
+            .toLowerCase()
+            .includes(suchwort.value.toLowerCase()) ||
+          b.abholort.toLowerCase().includes(suchwort.value.toLowerCase())
+      );
     });
 
     return {
