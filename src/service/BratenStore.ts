@@ -24,23 +24,34 @@ function push(ele: Braten): void {
 
 async function update(): Promise<void> {
 
-  const bratenliste = Array<Braten>()
   const url = "/api/braten"
+  const bratenliste = Array<Braten>()
 
   try {
     const response = await fetch(url)
     const jdata: Array<Braten> = await response.json()
     for (const b of jdata) {
+      console.debug(b)
       bratenliste.push(b)
     }
+    state.liste = bratenliste
     state.errormessage = ""
   } catch (reason) {
     console.log(`FEHLER: ${reason}`)
     state.errormessage = "Fehler bei der Serverkommunikation"
   }
 
-  state.liste = bratenliste
 
+}
+
+async function remove(id: number): Promise<void> {
+  const url = `/api/braten/${id}`
+  try {
+    await fetch(url, {method: 'delete'})
+  } catch (reason) {
+    console.log(`FEHLER: ${reason}`)
+    state.errormessage = "Fehler bei der Serverkommunikation"
+  }
 }
 
 /*
@@ -54,6 +65,7 @@ export function useBraten() {
     liste: computed(() => state.liste),
     errormessage: computed(() => state.errormessage),
     update,
-    push
+    push,
+    remove
   }
 }
