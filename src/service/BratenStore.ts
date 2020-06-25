@@ -3,19 +3,38 @@
 //////////////////////////////////////////////////////////////////////////////
 import Vue from 'vue'
 import CompositionApi, { reactive } from '@vue/composition-api'
+import {Client, Message} from '@stomp/stompjs';
+
 Vue.use(CompositionApi)
 //////////////////////////////////////////////////////////////////////////////
 
 import { computed } from '@vue/composition-api'
-
 import '@/service/Braten'
 
 /**************************************************/
+
+const wsurl = "ws://localhost:9090/stompbroker"
+const DEST = "/topic/braten"
+
 
 const state = reactive({
   liste: Array<Braten>(),
   errormessage: ""
 })
+
+const stompclient = new Client({brokerURL: wsurl})
+stompclient.onConnect = (frame) => {
+  stompclient.subscribe(DEST, (message) => {
+    const bratenMsg: BratenMessage = JSON.parse(message.body)
+    if (bratenMsg.operation === "delete") {
+      state.liste = state.liste.filter(b => b.id !== bratenMsg.braten.id)
+    } else if (bratenMsg.operation === "change") {
+      state.liste = state.liste.filter(b => b.id !== bratenMsg.braten.id)
+      state.liste.push(bratenMsg.braten)
+    }
+  });
+};
+stompclient.activate()
 
 function push(ele: Braten): void {
   state.liste.push(ele)
