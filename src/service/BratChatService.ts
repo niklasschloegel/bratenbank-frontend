@@ -18,7 +18,7 @@ function startChat() {
         stompclient = new Client({brokerURL: wsurl})
         stompclient.onConnect = (frame) => {
             stompclient.subscribe(RCV, (message) => {
-                let delcount = lines.value.length < 20 ? 0 : 1
+                const delcount = lines.value.length < 20 ? 0 : 1
                 lines.value.splice(0, delcount, message.body)
             })
         }
@@ -36,7 +36,7 @@ function send(nachricht: string) {
 }
 
 
-export default function useBratChatService() {
+export function useBratChatService() {
     return {
         lines: computed(() => lines),
         isConnected: computed(() => isConnected),
