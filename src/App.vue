@@ -23,10 +23,11 @@
       <div class="columns">
         <div class="column is-three-quarters">
           <div class="block">
-            <div class="box">
-              <h1 class="title">Das aktuelle Angebot</h1>
-              <BratenListe />
-            </div>
+            <!--
+            <BratenListeView/>
+            -->
+
+            <BratenChatView/>
           </div>
         </div>
         <div class="column">
@@ -40,15 +41,16 @@
 
 <script lang="ts">
 import Vue from "vue";
-import BratenListe from "@/components/BratenListe.vue";
 import VegetarizitaetsRechner from "@/components/VegetarizitaetsRechner.vue";
 import BratChat from "@/components/BratChat.vue";
+//import BratenListeView from "@/views/BratenListeView.vue";
+import BratenChatView from "@/views/BratenChatView.vue";
 
 export default Vue.extend({
   name: "App",
   components: {
-    BratenListe,
     VegetarizitaetsRechner,
+    BratenChatView,
     BratChat
   }
 });

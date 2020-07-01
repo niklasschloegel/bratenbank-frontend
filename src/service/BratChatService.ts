@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import CompositionApi, {ref, computed} from '@vue/composition-api'
-import {Client, Message} from '@stomp/stompjs'
+import {Client} from '@stomp/stompjs'
 
 Vue.use(CompositionApi)
 
@@ -16,7 +16,8 @@ let stompclient: Client
 function startChat() {
     if (!stompclient) {
         stompclient = new Client({brokerURL: wsurl})
-        stompclient.onConnect = (frame) => {
+        stompclient.onConnect = () => {
+            isConnected.value = true
             stompclient.subscribe(RCV, (message) => {
                 const delcount = lines.value.length < 20 ? 0 : 1
                 lines.value.splice(0, delcount, message.body)

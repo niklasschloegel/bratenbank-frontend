@@ -3,13 +3,14 @@
         <form @submit.prevent="sendMsg()">
             <div class="field has-addons">
                 <div class="control">
-                    <input class="input is-small" type="text" v-model="chatmsg">
+                    <label for="status" v-if="isConnected">Server connected</label><br/>
+                    <input class="input is-small" id="status" type="text" v-model="chatmsg">
                 </div>
                 <div class="control">
+                    <br>
                     <input class="is-small button is-primary" type="submit" value="abschicken"/>
                 </div>
             </div>
-            <span v-if="isConnected">Server connected</span>
         </form>
 
         <div>
@@ -36,7 +37,7 @@
             }
 
             console.log(lines)
-            return {chatmsg, sendMsg, isConnected, lines: lines.value}
+            return {chatmsg, sendMsg, isConnected: isConnected.value, lines: lines.value}
         }
     })
 </script>
