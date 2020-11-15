@@ -12,9 +12,5 @@ das Projekt mit seinen Dependencies initialisiert werden und mit
 ```
 npm run serve
 ```
-bzw.
-```
-npm run build
-```
 gestartet werden und ist dann unter http://localhost:8080 erreichbar.
 
