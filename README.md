@@ -1,34 +1,20 @@
-# bratenbank-frontend
+# **Webbasierte Anwendungen SS 2020**
+### _Bratenbank-Backend von Niklas Schlögel_
 
-## Verwendete Pakete
-* npm install @vue/composition-api
-* npm install @fortawesome/fontawesome-free
-* npm install bulma
+Das zugehörige Frontend zum Projekt [bratenbank-backend](https://github.com/niklasschloegel/bratenbank-backend).
 
-## Project setup
+## Installationsanweisungen
+Sobald das Repository geklont wurde kann im entsprechenden Verzeichnis mit
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
+das Projekt mit seinen Dependencies initialisiert werden und mit 
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
+bzw.
 ```
 npm run build
 ```
+gestartet werden und ist dann unter http://localhost:8080 erreichbar.
 
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
